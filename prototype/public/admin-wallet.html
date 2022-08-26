@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SIMPLE ASSET PROTOTYPE</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <!-- jquery 라이브러리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <br>
+        <h1>Welcome to SIMPLE ASSET PROTOTYPE</h1>
+        <p>어릴적... 순수한 마음으로...</p>
+        <h2> 관리자 인증서 생성 페이지 </h2>
+
+        <br>
+        <label for="adminid" class="form-label">관리자 ID:</label>
+        <input type="text" id="adminid" class="form-control">
+        <br>
+        <label for="password" class="form-label">관리자 PASSWORD:</label>
+        <input type="password" id="password" class="form-control">
+        <br>
+        <button id="btn" class="btn btn-outline-warning">관리자인증서생성</button>
+        <br>
+        <br>
+        
+        <br><br>
+    </div>
+    <div class="container" id="result"></div>
+
+</body>
+
+<script>
+    $('#btn').click( ()=> {
+        // parameter가져오기
+        var adminid = $('#adminid').val();
+        var passwd = $('#password').val();
+        // /admin post 요청하기
+        $.post('/admin', {adminid, passwd}, (data)=>{
+            
+            if(data.result == 'success'){
+                alert("성공했습니다.");
+            }else {
+                alert("실패했습니다.");
+            }
+            // 응답 표시하기
+            $('#result').empty();
+            $('#result').append("<p>"+JSON.stringify(data)+"</p>");
+        });
+    });
+
+</script>
+<style></style>
+
+</html>
